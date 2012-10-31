@@ -1,0 +1,27 @@
+<h1>List Projects Assigned to</h1>
+
+<table id="customers">
+  <tr class="alt">
+    <th>User</th>
+    <th>Project</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_attend_projects.each do |user_attend_project| %>
+  <tr class="alt">
+    <td><%= user_attend_project.user.name %></td>
+    <td><%= user_attend_project.project.name %></td>
+    <td><%= user_attend_project.description %></td>
+    <td><%= link_to 'Show', user_attend_project, class: 'background' %></td>
+    <td><%= link_to 'Edit', edit_user_attend_project_path(user_attend_project)  class: 'background'  %></td>
+    <td><%= link_to 'Destroy', user_attend_project, method: :delete, data: { confirm: 'Are you sure?' }   class: 'background'  %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User attend project', new_user_attend_project_path %>

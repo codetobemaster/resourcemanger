@@ -1,0 +1,52 @@
+<p> <%= notice %></p>
+<div class="row">
+<div class="span2"><%= t('projects.name')%></div>
+<div class="span4"><%=@project.name %></div>
+</div>
+
+<div class="row">
+<div class="span2"></div>
+<div class="span4"></div>
+</div>
+
+<div class="row">
+<div class="span2"></div>
+<div class="span4"></div>
+</div>
+
+<div class="row">
+<div class="span2"></div>
+<div class="span4"></div>
+</div>
+
+<div class="row">
+<div class="span2"></div>
+<div class="span4"></div>
+</div>
+
+<table id="customers" >
+    <tr class="alt">
+   <td><b></b></td> <td>></td>
+    </tr>
+ <tr class="alt">
+ 	<td>   <b>Description:</b></td> <td><%= @project.description %></td>
+ </tr>
+   <tr class="alt">
+   	<td> <b>Start:</b></td> <td><%= @project.start %></td>
+   </tr>
+
+    <tr class="alt">
+    	   <td> <b>End:</b></td> <td><%= @project.end %></td>
+    </tr>
+
+  <tr class="alt">
+  	<td><b>Status:</b></td> <td><%= @project.status %></td>
+  </tr>
+   <tr class="alt">
+   	<b>Other:</b><td><%= @project.other %></td>
+   </tr>
+
+  </table>
+
+<%= link_to 'Edit', edit_project_path(@project),  class: 'background' %> |
+<%= link_to 'Back', projects_path ,  class: 'background' %>

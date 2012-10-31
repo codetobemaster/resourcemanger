@@ -1,0 +1,32 @@
+
+   <script>
+    $(function() {
+        $( "#time_in_time_out_WorkingDay" ).datepicker({ format: 'yyyy-mm-dd'})
+
+    });
+
+    </script>
+
+    	<div class="span11 offset2"><div class="row"><div class="span2"><%= f.label "Staff Name" %></div>
+    	<%= f.hidden_field :EmployeeID %>
+    	<div class="span6"><%= f.label  :"#{@time_in_time_out.staff.EmployeeName}" %></div></div>
+        </div>
+    	<div class="span11 offset2">
+    	<div class="row">
+        <div class="span2"><%= f.label :TimeIn %></div>
+          <div class="span6"><%= f.text_field :TimeIn, value:
+        ((!params[:TimeIn].nil? ) ?  params[:TimeIn] :  ((@time_in_time_out.TimeIn.blank? || @time_in_time_out.TimeIn.nil? )  ? ' ' : @time_in_time_out.TimeIn.strftime('%H:%M')))%></div></div>
+          </div>
+
+        <div class="span11 offset2"><div class="row">
+        <div class="span2"><%= f.label :TimeOut %></div>
+         <div class="span6"><%= f.text_field  :TimeOut, value:
+         ((@time_in_time_out.TimeOut.blank? || @time_in_time_out.TimeOut.nil?)  ? '' : @time_in_time_out.TimeOut.strftime('%H:%M'))%></div></div>
+         </div>
+
+        <div class="span11 offset2"><div class="row">
+        <div class="span2"><%= f.label :WorkingDay %></div>
+<div class="span6"><%= f.text_field  :WorkingDay, value:
+((@time_in_time_out.WorkingDay.blank? || @time_in_time_out.WorkingDay.nil?)  ? '' : @time_in_time_out.WorkingDay.strftime('%Y-%m-%d')) %></div></div>
+         </div>
+        </div>

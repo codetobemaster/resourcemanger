@@ -1,0 +1,119 @@
+<header class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to t('system.app_name'), root_path, id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+          <% if signed_in? %>
+
+        <!--   <% if current_user.admin? %>
+           <li><%= link_to t('admin.list_account'), users_path %></li>
+           <li><%= link_to t('admin.list_project'), projects_path %></li>
+           <li><%= link_to t('admin.add_member_to_project'), new_user_attend_project_path %></li>
+           <% end %>--> <!-- end wirte admin menu-->
+
+<!--project  management-->
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <%= t ('project_manager.main_menu') %> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+      <!--Create projects-->
+                <li><%= link_to  t('project_manager.project_add'), new_project_path %></li>
+        <li class="divider"></li>
+      <!--Assign user to project-->
+                <li><%= link_to t('project_manager.assign_member'), new_user_attend_project_path %></li>
+        <li class="divider"></li>
+      <!--Resport tasks perusers-->
+                <li><%= link_to t('project_manager.review_task'), '#' %></li>
+              </ul>
+            </li>
+
+<!--Acounts Managers-->
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <%= t ('account_manager.account_manager_title') %> <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to  t('account_manager.employee_manager'), '#' %></li>
+                 <li class="divider"></li>
+                <li><%= link_to t('account_manager.seach_employee'), '#' %></li>
+                 <li class="divider"></li>
+                <li><%= link_to t('account_manager.export_employee_to_excel'), '#' %></li>
+              </ul>
+            </li>
+
+
+<!--Attendants Managers-->
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <%= t ('attendant_manager.main_menu') %> <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+      <!--Time card manager-->
+                      <li><%= link_to  t('attendant_manager.time_card_manager'), time_in_time_outs_path(woking_day: (Date.today- 1.day ).to_s) %></li>
+        <li class="divider"></li>
+      <!--Dayly report-->
+                      <li><%= link_to t('attendant_manager.dayly_report'), time_in_time_outs_path(search: Date.today.to_s) %></li>
+
+        <li class="divider"></li>
+      <!--monthly reporth-->
+                <li><%= link_to t('attendant_manager.monthly_report'), '#' %></li>
+
+
+        <li class="divider"></li>
+      <!--yearly reports Managers-->
+                <li><%= link_to t('attendant_manager.monthly_report'), '#' %></li>
+
+        <li class="divider"></li>
+      <!--Summary reports-->
+                <li><%= link_to t('attendant_manager.summary_report'), '#' %></li>
+
+              </ul>
+            </li>
+
+
+<!--Skill management-->
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <%= t ('skil_manager.main_menu') %> <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+      <!--List all members skill-->
+                      <li><%= link_to  t('skil_manager.list_all'), '#' %></li>
+        <li class="divider"></li>
+      <!--Seach skills-->
+                      <li><%= link_to t('skil_manager.review_skill'), '#' %></li>
+              </ul>
+            </li>
+
+
+<!--user menu-->
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+               <%= t('user.main_menu')%> <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+        <!--Schedule manager-->
+                <li><%= link_to t('user.list_schedules'), schedules_path %></li>
+                <li class="divider"></li>
+        <!--profile manager-->
+                <li><%= link_to t('user.profile'), current_user %></li>
+                 <li class="divider"></li>
+        <!--Change user setting-->
+                <li><%= link_to t('user.setting'), edit_user_path(current_user) %></li>
+        <!--Change passwords-->
+                <li class="divider"></li>
+                <li>
+                  <%= link_to t('system.sign_out'), signout_path, method: "delete" %>
+                </li>
+              </ul>
+            </li>
+
+          <% else %> <!-- if not login-->
+            <li><%= link_to "Sign in", signin_path %></li>
+          <% end %> <!--end write menu-->
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,36 @@
+<p> <%= notice %></p>
+<div class="row">
+<div class="span2"><%= t('projects.name')%></div>
+<div class="span4"><%=@project.name %></div>
+</div>
+
+<div class="row">
+<div class="span2"><%= t('projects.description')%></div>
+<div class="span4"><%=@project.description %></div>
+</div>
+
+<div class="row">
+<div class="span2"><%= t('projects.start')%></div>
+<div class="span4"><%=@project.start %></div>
+</div>
+
+
+
+<div class="row">
+<div class="span2"><%= t('projects.end')%></div>
+<div class="span4"><%=@project.end %></div>
+</div>
+
+<div class="row">
+<div class="span2"><%= t('projects.status')%></div>
+<div class="span4"><%=@project.status %></div>
+</div>
+
+<div class="row">
+<div class="span2"><%= t('projects.other')%></div>
+<div class="span4"><%=@project.other %></div>
+</div>
+
+
+<%= link_to t('system.link_edit'), edit_project_path(@project),  class: 'background' %> |
+<%= link_to t('system.link_back'), projects_path ,  class: 'background' %>

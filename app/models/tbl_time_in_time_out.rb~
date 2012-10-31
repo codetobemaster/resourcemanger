@@ -1,0 +1,6 @@
+class tblTimeInTimeOut < ActiveRecord::Base
+self.table_name= 'tblTimeInTimeOut'
+self.primary_key= 'TimeID'
+attr_accessible :EmployeeID, :TimeIn, :TimeOut, :WorkingDay, :ShiftID
+
+end

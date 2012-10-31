@@ -1,0 +1,5 @@
+<h1>Assgin user to Project</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', user_attend_projects_path %>

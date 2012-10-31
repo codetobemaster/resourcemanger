@@ -1,0 +1,91 @@
+en:
+ errors:
+    messages:
+      invalid_date: "is not a valid date"
+      invalid_time: "is not a valid time"
+      invalid_datetime: "is not a valid datetime"
+      is_at: "must be at %{restriction}"
+      before: "must be before %{restriction}"
+      on_or_before: "must be on or before %{restriction}"
+      after: "must be after %{restriction}"
+      on_or_after: "must be on or after %{restriction}"
+ date:
+    formats:
+      default: '%Y-%m-%d'
+ time:
+    formats:
+      default: '%H:%M'
+ datetime:
+    formats:
+        default: '%Y-%m-%d %H:%M'
+ system:
+         signed_in: "Sign in"
+         sign_out: "Sign out"
+         link_edit: "Edit"
+         link_show: "Show"
+         link_new: "New"
+         link_back: "Back"
+         link_destroy: "Destroy"
+         confirm: "Are you sure?"
+         copyright: "Copyright © 2012 Framgia Company"
+         app_name: "Resource system"
+         btn_save: "Save"
+         no_record_found: "No Record Found"
+         btn_search: "Search"
+
+ user:
+         profile: "Profile"
+         setting: "Settings"
+         list_schedules: "List Schedules"
+         main_menu: "User Manager"
+ users:
+    edit:
+     title: "Edit User"
+ admin:
+         list_account: "List Accounts"
+         list_project: "List Projects"
+         add_member_to_project: "Add members to Project"
+ account_manager:
+         account_manager_title: " Accounts Manager"
+         employee_manager: "Employee Manager"
+         export_employee_to_excel: "Export Employees to Excel "
+         seach_employee: "Seach Employees"
+ projects:
+        name: "Name"
+        description: "Description"
+        start: "Start"
+        end: "End"
+        other: "Other"
+        list_projects: "List Projects"
+        edit:
+           title: "Edit Project"
+        status: "Status"
+ time_in_time_out:
+        index_title: "Attendants Manager"
+        employee_id_title: "Staff ID"
+        staff_name: "Staff Name"
+        time_in_title: "Time In"
+        time_out_title: "Time Out"
+        working_day_title: "Working Day"
+        edit_title: "Edit TimeCard Report"
+        woking_hours: "Woking Hours"
+        total_woking_hours: "Total Woking Hours"
+        count_NA: "Number NA"
+        woking_day_search: "Working Day:"
+        department: "Department:"
+ project_manager:
+       main_menu: "Projects Manager"
+       project_add: "Add project"
+       assign_member: "Assign members"
+       review_task: "Review Tasks"
+ skil_manager:
+        main_menu:  "Skills Manager"
+        list_all: "List All Skill"
+        review_skill: "Review Skill"
+ attendant_manager:
+        main_menu: "Attendants Manager"
+        time_card_manager: "Time Card Manager"
+        dayly_report: "Dayly Report"
+        monthly_report: "Monthly Report"
+        yearly_report: "Yearly Report"
+        summary_report: "Summary Report"

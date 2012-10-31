@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User attend projects:</b>
+  <%= @schedule.user_attend_projects %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%= @schedule.year %>
+</p>
+
+<p>
+  <b>Month:</b>
+  <%= @schedule.month %>
+</p>
+
+<p>
+  <b>Week:</b>
+  <%= @schedule.week %>
+</p>
+
+<p>
+  <b>Numberdays:</b>
+  <%= @schedule.numberdays %>
+</p>
+
+<p>
+  <b>Taskcontent:</b>
+  <%= @schedule.taskcontent %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%= @schedule.comment %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @schedule.status %>
+</p>
+
+
+<%= link_to 'Edit', edit_schedule_path(@schedule) %> |
+<%= link_to 'Back', schedules_path %>

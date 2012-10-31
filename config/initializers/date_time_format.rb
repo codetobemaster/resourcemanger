@@ -1,0 +1,5 @@
+Time::DATE_FORMATS[:short] = "%H:%M %S"
+
+#Date::DATE_FORMATS[:short] = "short %Y-%m-%d"
+
+DateTime::DATE_FORMATS.merge!(:default => "%Y-%m-%d %H:%M %S")

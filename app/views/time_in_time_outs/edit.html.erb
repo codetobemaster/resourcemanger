@@ -1,0 +1,18 @@
+<% provide(:title,t('time_in_time_out.edit_title')) %>
+<div class="row">
+    <%= form_for(@time_in_time_out) do |f| %>
+    <div class="span11 offset2">
+    <div class="span6">
+   <%= render 'shared/error_messages', object: f.object %>
+   </div>
+   </div>
+    <%= render 'fields', f: f%>
+<div class="row">
+<div class="span11 offset2">
+<div class="span2"><%= f.submit t('system.btn_save'), class: "btn  btn-primary" %></div>
+<div class="span2"><%= link_to t('system.link_back'), time_in_time_outs_path  %></div>
+
+</div>
+</div>
+<% end %>
+</div>

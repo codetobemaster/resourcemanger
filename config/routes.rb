@@ -1,4 +1,16 @@
 Resourcemanager::Application.routes.draw do
+  resources :schedules
+  resources :user_attend_projects
+  resources :projects
+  resources :users
+  resources :time_in_time_outs
+  resources :sessions, only: [:new, :create, :destroy]
+
+  root to: 'sessions#new'
+  match '/signup',  to: 'users#new'
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

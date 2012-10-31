@@ -1,0 +1,17 @@
+class ProjectsSweeper <ActionController::Caching::Sweeper
+	observe Project
+	def affter_create(project)
+		expire_cache_for(project)
+	end
+	def affer_update(project)
+		expire_cache_for(project)
+	end
+	def affter_destroy(project)
+		expire_cache_for(project)
+	end
+	def expire_cache_for(project)
+		expire_page(controller: 'products', action:'index')
+		expire_fragment('project_all')
+	end
+
+end

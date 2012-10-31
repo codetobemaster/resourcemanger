@@ -1,0 +1,38 @@
+<h1>Listing schedules</h1>
+
+<table id="customers">
+  <tr class="alt">
+  <th>Projects </th>
+    <th>User attend projects</th>
+    <th>Year</th>
+    <th>Month</th>
+    <th>Week</th>
+    <th>Numberdays</th>
+    <th>Taskcontent</th>
+    <th>Comment</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @schedules.each do |schedule| %>
+  <tr class="alt">
+   <td><%= Project.find(UserAttendProject.find(schedule.user_attend_projects_id).project_id).name%></td>
+    <td><%= schedule.year %></td>
+    <td><%= schedule.month %></td>
+    <td><%= schedule.week %></td>
+    <td><%= schedule.numberdays %></td>
+    <td><%= schedule.taskcontent %></td>
+    <td><%= schedule.comment %></td>
+    <td><%= schedule.status %></td>
+    <td><%= link_to 'Show', schedule, class: 'background' %></td>
+    <td><%= link_to 'Edit', edit_schedule_path(schedule)  , class: 'background' %></td>
+    <td><%= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' }, class: 'background'  %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Schedule', new_schedule_path , class: 'background'  %>

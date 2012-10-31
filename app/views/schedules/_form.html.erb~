@@ -1,0 +1,47 @@
+<%= form_for(@schedule) do |f| %>
+  <% if @schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
+
+      <ul>
+      <% @schedule.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<table id="customers" >
+	<tr class="alt" >
+	<td  >  <%= f.label :user_attend_projects_id %>
+     <%= f.collection_select :user_attend_projects_id, UserAttendProject.where("user_id=?",current_user.id), :id, :id, :prompt => true %></td>
+	<td> <%= f.label :status %>
+    <%= f.number_field :status %></td>
+	</tr>
+
+
+	<tr class="alt" >
+    <td><%= f.label :year %>
+    <%= f.number_field :year %></td>
+    <td> <%= f.label :month %>
+    <%= f.number_field :month %> </td>
+	</tr>
+
+	<tr class="alt" >
+	<td>  <%= f.label :week %>
+    <%= f.number_field :week %> </td>
+    	<td>  <%= f.label :numberdays %>
+    <%= f.number_field :numberdays %></td>
+	</tr>
+
+	<tr class="alt" >
+	<td>   <%= f.label :taskcontent %>
+     <%= f.text_area :taskcontent ,:size => "20x4" %> </td>
+    <td>  <%= f.label :comment %>
+    <%= f.text_area :comment ,:size => "20x4" %></td>
+	</tr>
+</table>
+  <div class="actions">
+    <%= f.submit "Create Schedule" , class: 'background'  %>
+  </div>
+<% end %>

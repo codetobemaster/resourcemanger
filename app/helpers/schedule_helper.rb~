@@ -1,0 +1,5 @@
+module ScheduleHelper
+ def all_day
+    Time.now.year..1.year.before
+  end
+end

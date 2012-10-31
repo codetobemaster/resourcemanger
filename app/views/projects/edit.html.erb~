@@ -1,0 +1,16 @@
+<h1>Editing project</h1>
+<% provide(:title,t('project.edit.title')) %>
+<div class="row">
+    <%= form_for(@project) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= render 'fields', f: f%>
+<div class="row">
+<div class="span5 offset2">
+<div class="span2"><%= f.submit t('system.btn_save'), class: "btn  btn-primary" %></div>
+<div class="span1"><%= link_to t('system.link_show'), @project  %></div>
+<div class="span1"><%= link_to t('system.link_back'), projects_path  %></div>
+
+</div>
+</div>
+<% end %>
+</div>

@@ -1,0 +1,37 @@
+<h1><%= t('projects.list_projects')%></h1>
+
+<table class="table table-striped" >
+
+  <tr>
+    <th><%= t('projects.name')%></th>
+    <th><%= t('projects.description')%></th>
+    <th><%= t('projects.start')%></th>
+    <th><%= t('projects.end')%></th>
+    <th><%= t('projects.status')%></th>
+    <th><%= t('projects.other')%></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% cache('project_all') do%>
+<% @projects.each do |project| %>
+  <tr >
+    <td><%= project.name %></td>
+    <td><%= project.description %></td>
+    <td><%= project.start %></td>
+    <td><%= project.end %></td>
+    <td><%= project.status %></td>
+    <td><%= project.other %></td>
+    <td><%= link_to t('system.link_show'), project , class: 'background '  %> </td>
+    <td><%= link_to t('system.link_edit'), edit_project_path(project) ,  class: 'background'  %></td>
+    <td><%= link_to t('system.link_destroy'), project, method: :delete, data: { confirm: t('system.confirm') } ,  class: 'background'  %></td>
+  </tr>
+<% end %>
+<% end %>
+</table>
+
+
+<br />
+
+<%= link_to 'New Project', new_project_path ,  class: 'background'  %>

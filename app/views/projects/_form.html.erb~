@@ -1,0 +1,26 @@
+<%= form_for(@project) do |f| %>
+ <%= render 'shared/error_messages', object: f.object %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <table id="customers" summary="Projects">
+    	<tr class="alt">
+        <td><%= f.label :name %></td> <td><%= f.text_field :name %> </td>
+        </tr>
+        <tr class="alt">
+        <td><%= f.label :description %></td><td><%= f.text_area :description, :size => "20x4" %></td>
+        </tr>
+        <tr class="alt">
+        <td><%= f.label :start %></td> <td><%= f.text_field :start%> </td>
+        </tr>
+        <tr class="alt">
+        <td><%= f.label :end %></td> <td><%= f.text_field :end %></td>
+        </tr>
+          <tr class="alt">
+        <td><%= f.label :status %></td> <td><%= f.number_field :status %> </td>
+
+        </tr>
+        <tr class="alt">
+        <td><%= f.label :other %></td><td> <%= f.text_field :other %></td>
+        </tr>
+</table>
+    <%= f.submit class: "btn btn-large btn-primary" %>
+<% end %>
