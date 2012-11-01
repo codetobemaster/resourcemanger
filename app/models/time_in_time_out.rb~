@@ -12,34 +12,40 @@ validates_date :WorkingDay ,before: Proc.new { 1.day.from_now.to_date }, before_
 
 
   def self.search(woking_day,dep)
-  @@queries=''
+  queries=''
    if (woking_day&& dep && !dep.blank? && !woking_day.blank?)
    time =woking_day.to_time
-      @@queries="WorkingDay between ? and ? and tblDepartment.DepartmentID =?",time.beginning_of_day,time.end_of_day -   1.second,dep.to_i
+      queries="WorkingDay between ? and ? and tblDepartment.DepartmentID =?",time.beginning_of_day,time.end_of_day -   1.second,dep.to_i
      # TimeInTimeOut.joins(:staff=>:department).where(@queries)
    else
    #TimeInTimeOut.joins(:staff=>:department)
    if(woking_day && !woking_day.blank? )
    time =woking_day.to_time
-    @@queries="WorkingDay between ? and ? ",time.beginning_of_day,time.end_of_day -   1.second
+    queries="WorkingDay between ? and ? ",time.beginning_of_day,time.end_of_day -   1.second
    else
     if(dep && !dep.blank? )
-     @@queries="tblDepartment.DepartmentID =?",dep.to_i
+     queries="tblDepartment.DepartmentID =?",dep.to_i
     end # if department is oke
    end # wokingday is oke
-
-
-
-
    end # end wokingday and department
  # run sql
- if(!@@queries.blank?)
- TimeInTimeOut.joins(:staff=>:department).where(@@queries)
+ if(!queries.blank?)
+ TimeInTimeOut.joins(:staff=>:department).where(queries)
  else
    TimeInTimeOut.joins(:staff=>:department)
  end
   end
 
+
+# Report month
+
+def self.report_month(department_id,year,month)
+  queries=''
+   if (year&& month && !month.blank? && !year.blank?)
+        queries= "YEAR(WorkingDay)= ? AND MONTH(WorkingDay)= ?",year.to_i, month.to_i
+  end
+  TimeInTimeOut.joins(:staff=>:department).where(queries)
+end
 
 
 end

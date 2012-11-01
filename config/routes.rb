@@ -10,6 +10,7 @@ Resourcemanager::Application.routes.draw do
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+  match '/monthly_report', to: 'time_in_time_outs#monthly_report'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

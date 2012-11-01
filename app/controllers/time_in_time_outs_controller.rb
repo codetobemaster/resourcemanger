@@ -15,6 +15,26 @@ depa=params[:department_id]
 
 end
 
+def monthly_report
+    department_id= (params[:department_id].nil? || params[:department_id] .blank?) ? 0: params[:department_id].to_i
+
+    year= (params[:year].nil? || params[:year].blank?) ? Date.today.year : params[:year].to_i
+    month= (params[:month].nil? || params[:month].blank?) ? Date.today.month : params[:month].to_i
+
+    @time_in_time_outs = TimeInTimeOut.report_month(department_id,year,month)
+    if(department_id!=0)
+         @staffs=Staff.where(DepartmentID: department_id.to_i)
+    else
+         @staffs=Staff.all
+    end
+
+    respond_to do |format|
+    format.html # monthly_report.html.erb
+    format.json { render json: @month }
+  end
+
+end
+
 
 
   def edit

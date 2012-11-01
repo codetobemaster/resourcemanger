@@ -1,0 +1,168 @@
+   <script>
+    $(function() {
+        $("#working_day").datepicker({ format: 'yyyy-mm-dd'})
+    });
+    </script>
+
+<h1><%= t('time_in_time_out.index_title')%></h1>
+<div class="row">
+    <%= form_tag monthly_report_path, method: 'get', class: "form-search" do %>
+    	<div class="span12 ">
+    	<div class="row">
+
+    	<div class="span4 input-append">
+    	 <span class="add-on"><%= t('time_in_time_out.department') %></span>
+
+    	 <select name="department_id" class="span3 ">
+    	 <option value=" ">Please select</option>
+                <% Department.all.each do |dep| %>
+                 <option value="<%= dep.DepartmentID %>"><%= dep.DepartmentName %></option>
+        <% end %>
+        </select>
+    	 </div>
+
+
+    	<div class="span2 input-append form-search">
+
+        <span class="add-on"><%= t('time_in_time_out.year') %></span>
+        <%= text_field_tag :year , params[:year], placeholder: "Year",class:"span1" %>
+        </div>
+  <div class="span2 input-append form-search">
+        <span class="add-on "><%= t('time_in_time_out.month') %></span>
+        <%= text_field_tag :month , params[:month], placeholder: "Month", class:"span1" %>
+        </div>
+        <div class="span1">  <%= submit_tag  "Search", WorkingDay: nil, class: "btn  btn-primary" %></div>
+          </div>
+          </div>
+
+        <div class="row">
+
+
+
+          </div>
+    <% end %>
+
+</div>
+
+<div class="row">
+
+<% if !@time_in_time_outs.nil? %>
+
+<div class="row span12">
+<table class="table table-hover" >
+
+  <tr>
+     <th class="span1"><span class="badge badge-success"> <%= t('system.no')%></span></th>
+    <th class="span2"><%= t('report_day.staff_name')%></th>
+    <th class="span2"><%= t('report_day.department')%></th>
+    <th class="span1"><%= t('report_day.total_woking_days')%></th>
+    <th><%= t('report_day.total_woking_hours')%></th>
+    <th  ><%= t('report_day.total_late')%></th>
+    <th ><%= t('report_day.total_early')%></th>
+    <th><%= t('report_day.total_over_time')%></th>
+  </tr>
+
+<%
+@i=0
+# List all Staff in system
+if(!@staffs.nil?)
+
+normal_time_in =t('system.normal_time_in').split(":")
+time_in_second=((normal_time_in[0].to_i )*3600 )+ ((normal_time_in[1].to_i)*60)
+normal_time_out =t('system.normal_time_out').split(":")
+time_out_second=((normal_time_out[0].to_i )*3600 )+ ((normal_time_out[1].to_i)*60)
+%>
+
+<%
+@staffs.each do |staff| %>
+  <tr>
+<%
+@i+=1
+day_woking=0
+working_hours=0
+total_early=0
+total_late=0
+time_late=0
+time_early=0
+
+# Start Loop for all Of time_card each Staff******************************************
+ time_cards=@time_in_time_outs.where(EmployeeID: staff.EmployeeID)
+
+# loop for each time_card of  staff
+if(!time_cards.nil?)
+ time_cards.each do |time_card|
+
+ # caculate working day
+ if(!time_card.WorkingDay.nil? && !time_card.WorkingDay.blank?)
+ day_woking+=1
+ end # end check time card is null
+ # caculate Hours work**************************************************
+ if(!time_card.TimeIn.nil? && !time_card.TimeOut.nil?)
+        timein=((time_card.TimeIn.to_time.min*60) +(time_card.TimeIn.to_time.hour*3600))
+        timeout=((time_card.TimeOut.to_time.min*60) +(time_card.TimeOut.to_time.hour*3600))
+        # increase woking Hours
+        working_hours+=timeout-timein
+        # caculate late times
+        if(timein>time_in_second)
+                total_late+=1
+                time_late+=timein-time_in_second
+        end
+        # caculate early times
+        if(timeout<time_out_second)
+                total_early+=1
+                time_early+=time_out_second-timeout
+        end
+
+ end
+# end caculate Hours wokrs*********************************************
+
+# start caculate come late and early **********************************
+
+
+
+#end  caculate come late and early ***********************************
+
+ end # end do each time_card**************************************************************
+ end # end time card check
+%>
+
+         <td> <span class="badge badge-success"><%=@i%></span> </td>
+        <td><%=staff.EmployeeName %> </td>
+        <td><%=staff.department.DepartmentName%> </td>
+        <td><%=day_woking%> </td>
+        <td><%=working_hours/3600%>:<%=working_hours%3600/60%> </td>
+        <td><%=total_late%>(<%=time_late/3600%>:<%=time_late%3600/60%>) </td>
+         <td><%=total_early%>(<%=time_early/3600%>:<%=time_early%3600/60%>) </td>
+
+<% end #end for staff
+end # end for if check staffs is not null
+ %>
+
+
+
+
+  </tr>
+
+
+
+
+<tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+</tr>
+</table>
+<%else
+t('no_record_found')
+ %>
+
+<% end %>
+</div>
+</div>

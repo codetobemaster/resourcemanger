@@ -5,9 +5,9 @@
     </script>
 
 <h1><%= t('time_in_time_out.index_title')%></h1>
-
+<div class="row">
     <%= form_tag time_in_time_outs_path, method: 'get', class: "form-search" do %>
-    	<div class="span11">
+    	<div class="span12">
     	<div class="row">
     	<div class="span5 input-append">
     	 <span class="add-on"><%= t('time_in_time_out.department') %></span>
@@ -22,41 +22,55 @@
     	<div class="span5 input-append form-search">
         <span class="add-on"><%= t('time_in_time_out.woking_day_search') %></span>
         <%= text_field_tag :working_day , params[:working_day], placeholder: "Date format: yyyy-mm-dd" %>
-        <%= submit_tag "Go!", WorkingDay: nil, class: "btn  btn-primary" %>
+
         </div>
+         <%= submit_tag "Go!", WorkingDay: nil, class: "btn  btn-primary" %>
           </div>
           </div>
     <% end %>
 
+</div>
 
 <div class="row">
 
 <% if !@time_in_time_outs.nil? %>
-<div class="span11 pagination "> <%= will_paginate %></div>
+<div class="row span12 ">  <%= will_paginate %> </div>
 
+<div class="row span12">
 <table class="table table-hover" >
 
   <tr>
-     <th class="span1"><%= t('system.no')%></th>
-    <th><%= t('time_in_time_out.staff_name')%></th>
-    <th><%= t('time_in_time_out.time_in_title')%></th>
-    <th><%= t('time_in_time_out.time_out_title')%></th>
+     <th class="span1"><span class="badge badge-success"> <%= t('system.no')%></span></th>
+    <th class="span2"><%= t('time_in_time_out.staff_name')%></th>
+    <th class="span2"><%= t('time_in_time_out.department')%></th>
+    <th><%= t('time_in_time_out.card_id')%></th>
+    <th class="span1" ><%= t('time_in_time_out.time_in_title')%></th>
+    <th class="span1"><%= t('time_in_time_out.time_out_title')%></th>
     <th><%= t('time_in_time_out.working_day_title')%></th>
-    <th><%= t('time_in_time_out.working_hours')%></th>
-
+    <th class="span1"><%= t('time_in_time_out.working_hours')%></th>
+    <th class="span1"><%= t('time_in_time_out.late_early')%></th>
     <th><%= t('system.link_edit')%></th>
   </tr>
 <%
 @total_hour=0
 @total_min=0
-@total_na=0
 @i=0
 %>
 <% @time_in_time_outs.each do |timeinout| %>
-
+<%
+late=false
+early=false
+normal_time_in =t('system.normal_time_in').split(":")
+time_in_second=((normal_time_in[0].to_i )*3600 )+ ((normal_time_in[1].to_i)*60)
+normal_time_out =t('system.normal_time_out').split(":")
+time_out_second=((normal_time_out[0].to_i )*3600 )+ ((normal_time_out[1].to_i)*60)
+%>
   <tr>
-   <td class="span1"><%= @i+=1%></td>
+   <td class="span1"><span class="badge badge-success"><%= @i+=1%></span></td>
     <td><%=timeinout.staff.EmployeeName %></td>
+
+    <td class="span2"><%=timeinout.staff.department.DepartmentName %></td>
+        <td><%=timeinout.staff.CardID %></td>
     <td> <%=
     if (!timeinout.TimeIn.nil?)
 
@@ -71,7 +85,7 @@
      end
      %></td>
     <td><%= if (!timeinout.WorkingDay.nil?)
-    timeinout.WorkingDay.strftime("%Y-%m-%d")
+     timeinout.WorkingDay.strftime("%Y-%m-%d")
     end
     %>  </td>
 
@@ -81,18 +95,36 @@ timein=((timeinout.TimeIn.to_time.min*60) +(timeinout.TimeIn.to_time.hour*3600))
 
 timeout=((timeinout.TimeOut.to_time.min*60) +(timeinout.TimeOut.to_time.hour*3600))
 
-if(timeout > timein)
+if(timeout >= timein)
+
+#caculate late and eary
+if(timein>time_in_second)
+late =true
+end
+if(timeout<time_out_second)
+early =true
+end
+# add to total time_in time_out.
 @total_hour+=((timeout-timein)/3600)
 @total_min+=(((timeout-timein)%3600)/60)
-else
-@total_na+=1
+
+
 end
-(timeout > timein)? "#{(timeout-timein)/3600}:#{((timeout-timein)%3600)/60}" : "Na"
+(timeout >= timein)? (label_tag "#{(timeout-timein)/3600}:#{((timeout-timein)%3600)/60}", nil, class: 'label' ): label_tag("Na", nil, class: 'label label-warning')
     end
-    %>  </td>
+    %>
+     </td>
+    <td class="span1" ><%=
+    if(!timeinout.TimeOut.nil?&& !timeinout.TimeIn.nil?)
+
+       (late && early) ? (label_tag t('time_in_time_out.in_late_out_early'),nil,:class => 'label label-important' ):(late ? (label_tag t('time_in_time_out.in_late'),nil,:class => 'label label-warning' ): (early ? (label_tag t('time_in_time_out.out_early'),nil,:class => 'label label-warning'): '' ))
+
+    end  # end if timeinout is not nil.
+
+      %> </td>
 
 
-    <td><%= link_to t('system.link_edit'), edit_time_in_time_out_path(timeinout) ,class: 'background'  %></td>
+    <td><%= link_to t('system.link_edit'), edit_time_in_time_out_path(timeinout) ,class: 'active'  %></td>
   </tr>
 <% end %>
 <tr>
@@ -104,14 +136,17 @@ end
         "#{@total_hour}:#{@total_min} "%></th>
         <th></th>
         <th></th>
-        <th><%="#{t('time_in_time_out.count_NA')}: #{@total_na}"%></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
         <th></th>
 </tr>
 </table>
 <%else
 t('no_record_found')
  %>
-<br />
+
 <% end %>
 </div>
-<%= link_to t('system.link_new'), new_time_in_time_out_path ,  class: 'background'  %>
+</div>

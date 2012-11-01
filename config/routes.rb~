@@ -4,7 +4,6 @@ Resourcemanager::Application.routes.draw do
   resources :projects
   resources :users
   resources :time_in_time_outs
-
   resources :sessions, only: [:new, :create, :destroy]
 
   root to: 'sessions#new'
