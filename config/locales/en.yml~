@@ -34,11 +34,13 @@ en:
          btn_search: "Search"
          normal_time_in: "8:30"
          normal_time_out: "17:30"
+         overtime_start_affter: "18:30"
+         no: "NO"
  user:
          profile: "Profile"
          setting: "Settings"
          list_schedules: "List Schedules"
-         main_menu: "User Manager"
+         main_menu: "Users"
  users:
     edit:
      title: "Edit User"
@@ -47,7 +49,7 @@ en:
          list_project: "List Projects"
          add_member_to_project: "Add members to Project"
  account_manager:
-         account_manager_title: " Accounts Manager"
+         account_manager_title: " Accounts"
          employee_manager: "Employee Manager"
          export_employee_to_excel: "Export Employees to Excel "
          seach_employee: "Seach Employees"
@@ -64,6 +66,7 @@ en:
  time_in_time_out:
         index_title: "Attendants Manager"
         employee_id_title: "Staff ID"
+        employee_id: "Staff ID"
         staff_name: "Staff Name"
         department: "Department"
         card_id: "Card ID"
@@ -83,26 +86,39 @@ en:
         year: "Year"
         month: "Month"
  report_day:
+        employee_id: "Staff ID"
         staff_name: "Staff Name"
         department: "Department"
-        total_woking_hours: "Total Woking Hours"
-        total_woking_days: "Total Woking Days"
-        total_early: "Total Left Early"
-        total_late: "Total Come Late"
-        total_over_time: "Total Over Time"
+        total_woking_hours: "Woking Hours"
+        total_woking_days: "Woking Days"
+        total_early: "Left Early"
+        total_late: "Come Late"
+        total_over_time: "Over Time"
+ report_month:
+        month_report_title: "Monthly Report"
+        all_staff_working_hours: "Total Hours"
+ staff:
+        name: "Name"
+        id: "ID"
+        email: "Email"
+        address: "Address"
+        gender: "Gender"
+        phone: "Phone"
+        department: "Department"
+        genders:
+                male: "Male"
+                female: "Female"
  project_manager:
-       main_menu: "Projects Manager"
+       main_menu: "Projects"
        project_add: "Add project"
        assign_member: "Assign members"
        review_task: "Review Tasks"
  skil_manager:
-        main_menu:  "Skills Manager"
+        main_menu:  "Skills"
         list_all: "List All Skill"
         review_skill: "Review Skill"
  attendant_manager:
-        main_menu: "Attendants Manager"
-        time_card_manager: "Time Card Manager"
-        dayly_report: "Dayly Report"
-        monthly_report: "Monthly Report"
-        yearly_report: "Yearly Report"
+        main_menu: "Attendants"
+        dayly_manager: "Dayly Manager"
+        monthly_yearly_report: "Monthly/Yearly Report"
         summary_report: "Summary Report"

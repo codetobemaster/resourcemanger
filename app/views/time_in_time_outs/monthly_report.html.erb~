@@ -4,16 +4,16 @@
     });
     </script>
 
-<h1><%= t('time_in_time_out.index_title')%></h1>
+<h1><%= t('report_month.month_report_title')%></h1>
 <div class="row">
-    <%= form_tag monthly_report_path, method: 'get', class: "form-search" do %>
+    <%= form_tag monthly_report_path, method: 'get' do %>
     	<div class="span12 ">
     	<div class="row">
 
     	<div class="span4 input-append">
     	 <span class="add-on"><%= t('time_in_time_out.department') %></span>
 
-    	 <select name="department_id" class="span3 ">
+    	 <select name="department_id" class="span3  ">
     	 <option value=" ">Please select</option>
                 <% Department.all.each do |dep| %>
                  <option value="<%= dep.DepartmentID %>"><%= dep.DepartmentName %></option>
@@ -29,7 +29,7 @@
         </div>
   <div class="span2 input-append form-search">
         <span class="add-on "><%= t('time_in_time_out.month') %></span>
-        <%= text_field_tag :month , params[:month], placeholder: "Month", class:"span1" %>
+        <%= text_field_tag :month , params[:month], placeholder: "Month", class:"span1 " %>
         </div>
         <div class="span1">  <%= submit_tag  "Search", WorkingDay: nil, class: "btn  btn-primary" %></div>
           </div>
@@ -53,7 +53,8 @@
 
   <tr>
      <th class="span1"><span class="badge badge-success"> <%= t('system.no')%></span></th>
-    <th class="span2"><%= t('report_day.staff_name')%></th>
+      <th class="span1"><%= t('report_day.employee_id')%></th>
+    <th class="span3"><%= t('report_day.staff_name')%></th>
     <th class="span2"><%= t('report_day.department')%></th>
     <th class="span1"><%= t('report_day.total_woking_days')%></th>
     <th><%= t('report_day.total_woking_hours')%></th>
@@ -64,17 +65,21 @@
 
 <%
 @i=0
+all_staff_working_hours=0
 # List all Staff in system
-if(!@staffs.nil?)
+if(!@time_in_time_outs_distinct.nil?&& !@time_in_time_outs_distinct.blank?&& !@time_in_time_outs.nil? && !@time_in_time_outs.blank?)
 
 normal_time_in =t('system.normal_time_in').split(":")
 time_in_second=((normal_time_in[0].to_i )*3600 )+ ((normal_time_in[1].to_i)*60)
 normal_time_out =t('system.normal_time_out').split(":")
 time_out_second=((normal_time_out[0].to_i )*3600 )+ ((normal_time_out[1].to_i)*60)
+over_time_start =t('system.overtime_start_affter').split(":")
+over_time_start_second=((over_time_start[0].to_i )*3600 )+ ((over_time_start[1].to_i)*60)
 %>
 
 <%
-@staffs.each do |staff| %>
+
+@time_in_time_outs_distinct.each do |t| %>
   <tr>
 <%
 @i+=1
@@ -84,33 +89,42 @@ total_early=0
 total_late=0
 time_late=0
 time_early=0
+total_over_time=0
+over_time_hours=0
 
 # Start Loop for all Of time_card each Staff******************************************
- time_cards=@time_in_time_outs.where(EmployeeID: staff.EmployeeID)
+ time_cards=@time_in_time_outs.where(EmployeeID: t.EmployeeID)
 
 # loop for each time_card of  staff
 if(!time_cards.nil?)
  time_cards.each do |time_card|
 
  # caculate working day
- if(!time_card.WorkingDay.nil? && !time_card.WorkingDay.blank? && !time_card.TimeIn.nil? && !time_card.TimeOut.nil?)
+ if(!time_card.WorkingDay.nil? && !time_card.WorkingDay.blank?)
  day_woking+=1
  end # end check time card is null
  # caculate Hours work**************************************************
- if(!time_card.TimeIn.nil? && !time_card.TimeOut.nil?)
+ if(!time_card.TimeIn.nil? && !time_card.TimeOut.nil? && !time_card.TimeIn.blank? && !time_card.TimeOut.blank? )
         timein=((time_card.TimeIn.to_time.min*60) +(time_card.TimeIn.to_time.hour*3600))
         timeout=((time_card.TimeOut.to_time.min*60) +(time_card.TimeOut.to_time.hour*3600))
         # increase woking Hours
-        working_hours+=timeout-timein
+        working_hours+=(timeout-timein)
+
         # caculate late times
         if(timein>time_in_second)
                 total_late+=1
-                time_late+=timein-time_in_second
+                time_late+=(timein-time_in_second)
         end
         # caculate early times
         if(timeout<time_out_second)
                 total_early+=1
-                time_early+=time_out_second-timeout
+                time_early+=(time_out_second-timeout)
+        end
+
+        # caculate overtime.
+        if(timeout>over_time_start_second.to_i)
+                total_over_time+=1
+                over_time_hours+=(timeout-over_time_start_second)
         end
 
  end
@@ -124,16 +138,19 @@ if(!time_cards.nil?)
 
  end # end do each time_card**************************************************************
  end # end time card check
+
+   all_staff_working_hours+=working_hours
 %>
 
          <td> <span class="badge badge-success"><%=@i%></span> </td>
-        <td><%=staff.EmployeeName %> </td>
-        <td><%=staff.department.DepartmentName%> </td>
+         <td><%=t.staff.EmployeeID %> </td>
+        <td><%=t.staff.EmployeeName %> </td>
+        <td><%=t.staff.department.DepartmentName%> </td>
         <td><%=day_woking%> </td>
         <td><%=working_hours/3600%>:<%=working_hours%3600/60%> </td>
         <td><%=total_late%>(<%=time_late/3600%>:<%=time_late%3600/60%>) </td>
-         <td><%=(total_early>0)? '' : total_early %>(<%=(time_early>0) ? '' : (time_early/3600) %>:<%=time_early%3600/60%>) </td>
-
+         <td><%=total_early%>(<%=time_early/3600%>:<%=time_early%3600/60%>) </td>
+         <td><%=total_over_time%>(<%=over_time_hours/3600%>:<%=over_time_hours%3600/60%>) </td>
 <% end #end for staff
 end # end for if check staffs is not null
  %>
@@ -149,14 +166,15 @@ end # end for if check staffs is not null
 <tr>
         <th></th>
         <th></th>
+        <th> <%= t('report_month.all_staff_working_hours') %> </th>
+        <th> <%=all_staff_working_hours/3600%>:<%=all_staff_working_hours%3600/60%> </th>
         <th></th>
         <th></th>
         <th></th>
         <th></th>
         <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
+
+
 </tr>
 </table>
 <%else

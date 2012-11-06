@@ -1,0 +1,34 @@
+<div class="row">
+                        <legend>Staffs Search</legend>
+    <%= form_tag staffs_path, method: 'get' do %>
+    	<div class="row">
+    	<div class="span4 input-append">
+    	 <span class="add-on"><%= t('staff.name') %></span>
+    	 <select name="EmployeeID" class="span3">
+    	 <option value=" ">Please select</option>
+                <% Staff.all.each do |staff| %>
+                 <option value="<%= staff.EmployeeID %>"><%= staff.EmployeeID %> - <%= staff.EmployeeName %></option>
+        <% end %>
+        </select>
+    	 </div>
+    	 <div class="span5 input-append">
+    	 <span class="add-on"><%= t('staff.department') %></span>
+    	 <select name="DepartmentID" class="span3">
+    	 <option value=" ">Please select</option>
+                <% Department.all.each do |de| %>
+                 <option value="<%= de.DepartmentID %>"> <%= de.DepartmentName %></option>
+        <% end %>
+        </select>
+    	 </div>
+
+
+        <div class="span1">  <%= submit_tag  "Search", EmployeeID: nil, class: "btn  btn-primary" %></div>
+
+          </div>
+
+
+    <% end %>
+    <br/>
+     <legend></legend>
+
+</div>

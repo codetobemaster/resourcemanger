@@ -2,12 +2,14 @@
 
 /* mixins, variables, etc. */
 
-$grayMediumLight: #eaeaea;
-
+$grayMediumLight: #999;
+$grayLight: #999;
+$grayDarker: #999;
+$gray: #999;
 /* universal */
 
 html {
-  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 body {
@@ -19,9 +21,8 @@ section {
 }
 
 textarea {
-  resize: hor;
+  resize: vertical;
 }
-
 
 .center {
   text-align: center;
@@ -55,6 +56,67 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+}
+
+.container,
+.navbar-static-top .container,
+.navbar-fixed-top .container,
+.navbar-fixed-bottom .container {
+  width: 1024px;
+}
+.span13
+{
+  width: 1024px;
+}
+.span13_in
+{
+  width: 1022px;
+}
+.span12 {
+  width: 940px;
+}
+.span11 {
+  width: 860px;
+}
+.span10 {
+  width: 780px;
+}
+.span9 {
+  width: 700px;
+}
+.span8 {
+  width: 620px;
+}
+.span7 {
+  width: 540px;
+}
+.span6 {
+  width: 460px;
+}
+.span5 {
+  width: 380px;
+}
+.span4 {
+  width: 300px;
+}
+.span4_2 {
+  width: 320px;
+}
+
+.span4_1 {
+  width: 250px;
+}
+.span3 {
+  width: 220px;
+}
+.span2 {
+  width: 140px;
+}
+.span2_1 {
+  width: 100px;
+}
+.span1 {
+  width: 60px;
 }
 
 

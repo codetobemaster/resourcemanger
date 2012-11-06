@@ -1,0 +1,104 @@
+<div class="row span11">
+
+
+</div>
+
+<div class="row">
+
+    <div class="tabbable span11"> <!-- Only required for left/right tabs -->
+    <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Section 1</a></li>
+    <li><a href="#tab2" data-toggle="tab">Section 2</a></li>
+    </ul>
+
+
+    <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+
+<div class="row">
+
+<% if !@staffs.nil? %>
+<div class="row span11">  <%= will_paginate %> </div>
+
+<div class="row span11">
+<table class="table table-hover" >
+
+  <tr>
+     <th class="span1"><span class="badge badge-success"> <%= t('system.no')%></span></th>
+     <th ><%= t('time_in_time_out.employee_id')%></th>
+    <th ><%= t('time_in_time_out.staff_name')%></th>
+    <th ><%= t('time_in_time_out.department')%></th>
+    <th><%= t('time_in_time_out.card_id')%></th>
+    <th ><%= t('time_in_time_out.time_in_title')%></th>
+    <th ><%= t('time_in_time_out.time_out_title')%></th>
+    <th><%= t('system.link_edit')%></th>
+  </tr>
+<%
+@i=0
+%>
+<% @staffs.each do |staff| %>
+
+  <tr>
+   <td class="span1"><span class="badge badge-success"><%= @i+=1%></span></td>
+   <td><%= staff.EmployeeID%>  </td>
+   <td><%= staff.EmployeeName %>   </td>
+   <td><%= staff.department.DepartmentName %>  </td>
+   <td><%= (staff.Gender ==0) ? 'Male' : 'Female' %>  </td>
+   <td><%= staff.Address %>  </td>
+   <td><%= staff.Phone%>  </td>
+
+    <td><%= link_to t('system.link_edit'), edit_staff_path(staff) ,class: 'active'  %></td>
+  </tr>
+<% end %>
+<tr>
+        <th></th>
+        <th></th>
+        <th></th>
+       <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+</tr>
+</table>
+<%else %>
+
+<div class="span11"> <%= t('no_record_found')%> </div>
+
+<% end %>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="tab-pane" id="tab2">
+    <p>Howdy, I'm in Section 2.</p>
+    </div>
+    </div>
+    </div>
+
+</div>

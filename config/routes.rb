@@ -3,6 +3,7 @@ Resourcemanager::Application.routes.draw do
   resources :user_attend_projects
   resources :projects
   resources :users
+  resources :staffs
   resources :time_in_time_outs
   resources :sessions, only: [:new, :create, :destroy]
 

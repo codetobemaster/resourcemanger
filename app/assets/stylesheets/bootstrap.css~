@@ -195,12 +195,15 @@ a:hover {
   min-height: 1px;
   margin-left: 20px;
 }
-.container,
-.navbar-static-top .container,
-.navbar-fixed-top .container,
-.navbar-fixed-bottom .container {
-  width: 940px;
-}
+
+ .container,
+  .navbar-fixed-top .container,
+  .navbar-fixed-bottom .container {
+    width: 1170px;
+  }
+  .container {
+    width: auto;
+  }
 .span12 {
   width: 940px;
 }
@@ -905,7 +908,7 @@ input[type="file"] {
   line-height: 30px;
 }
 select {
-  width: 110px;
+  width: 220px;
   border: 1px solid #cccccc;
   background-color: #ffffff;
 }

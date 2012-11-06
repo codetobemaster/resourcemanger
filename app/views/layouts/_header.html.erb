@@ -49,20 +49,13 @@
                 <%= t ('attendant_manager.main_menu') %> <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-      <!--Time card manager-->
-                      <li><%= link_to  t('attendant_manager.time_card_manager'), time_in_time_outs_path(woking_day: (Date.today- 1.day).to_s) %></li>
-        <li class="divider"></li>
-      <!--Dayly report-->
-                      <li><%= link_to t('attendant_manager.dayly_report'), time_in_time_outs_path(search:        Date.today.to_s) %></li>
+      <!--Dayly time card manager-->
+                      <li><%= link_to  t('attendant_manager.dayly_manager'), time_in_time_outs_path(working_day: (Date.today- 4.day).to_s) %></li>
 
         <li class="divider"></li>
-      <!--monthly reporth-->
-                <li><%= link_to t('attendant_manager.monthly_report'), '#' %></li>
+      <!--Monthly and yearly_report-->
+                      <li><%= link_to t('monthly_yearly_report'), monthly_report_path(year: Date.today.year , month: Date.today.month) %></li>
 
-
-        <li class="divider"></li>
-      <!--yearly reports Managers-->
-                <li><%= link_to t('attendant_manager.monthly_report'), '#' %></li>
 
         <li class="divider"></li>
       <!--Summary reports-->

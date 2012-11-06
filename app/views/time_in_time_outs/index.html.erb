@@ -6,12 +6,13 @@
 
 <h1><%= t('time_in_time_out.index_title')%></h1>
 <div class="row">
-    <%= form_tag time_in_time_outs_path, method: 'get', class: "form-search" do %>
+    <%= form_tag time_in_time_outs_path, method: 'get' do %>
     	<div class="span12">
     	<div class="row">
-    	<div class="span5 input-append">
-    	 <span class="add-on"><%= t('time_in_time_out.department') %></span>
-    	 <select name="department_id">
+
+    	<div class="input-append span4_1">
+    	 <span class="add-on span1"><%= t('time_in_time_out.department') %></span>
+    	 <select name="department_id" class="span2" >
     	 <option value=" ">Please select</option>
     <% Department.all.each do |dep| %>
                  <option value="<%= dep.DepartmentID %>"><%= dep.DepartmentName %></option>
@@ -19,12 +20,24 @@
         </select>
     	 </div>
 
-    	<div class="span5 input-append form-search">
-        <span class="add-on"><%= t('time_in_time_out.woking_day_search') %></span>
-        <%= text_field_tag :working_day , params[:working_day], placeholder: "Date format: yyyy-mm-dd" %>
+
+    	<div class="input-append span4_1">
+    	 <span class="add-on span1 "><%= t('time_in_time_out.staff_name') %></span>
+    	 <select name="employee_id" class="span2" >
+    	 <option value=" ">Please select</option>
+    <% Staff.all.each do |staff| %>
+                 <option value="<%=staff.EmployeeID %>">(<%=staff.EmployeeID %>)<%=staff.EmployeeName %></option>
+        <% end %>
+        </select>
+    	 </div>
+
+
+    	<div class="input-append span4_2">
+        <span class="add-on span1"><%= t('time_in_time_out.woking_day_search') %></span>
+        <%= text_field_tag :working_day , params[:working_day], placeholder: "Date:'YYYY-MM-DD'", class: "span2" %>
+        <%= submit_tag "Search", WorkingDay: nil, class: "btn  btn-primary span1"%>
 
         </div>
-         <%= submit_tag "Go!", WorkingDay: nil, class: "btn  btn-primary" %>
           </div>
           </div>
     <% end %>
@@ -41,7 +54,8 @@
 
   <tr>
      <th class="span1"><span class="badge badge-success"> <%= t('system.no')%></span></th>
-    <th class="span2"><%= t('time_in_time_out.staff_name')%></th>
+     <th class="span1"><%= t('time_in_time_out.employee_id')%></th>
+    <th class="span3"><%= t('time_in_time_out.staff_name')%></th>
     <th class="span2"><%= t('time_in_time_out.department')%></th>
     <th><%= t('time_in_time_out.card_id')%></th>
     <th class="span1" ><%= t('time_in_time_out.time_in_title')%></th>
@@ -67,6 +81,8 @@ time_out_second=((normal_time_out[0].to_i )*3600 )+ ((normal_time_out[1].to_i)*6
 %>
   <tr>
    <td class="span1"><span class="badge badge-success"><%= @i+=1%></span></td>
+
+    <td><%=timeinout.staff.EmployeeID %></td>
     <td><%=timeinout.staff.EmployeeName %></td>
 
     <td class="span2"><%=timeinout.staff.department.DepartmentName %></td>
@@ -128,6 +144,7 @@ end
   </tr>
 <% end %>
 <tr>
+        <th></th>
         <th></th>
         <th><%="#{t('time_in_time_out.total_woking_hours')}: "%></th>
        <th><%=

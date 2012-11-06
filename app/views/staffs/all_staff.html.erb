@@ -1,0 +1,31 @@
+
+<% if !@staffs.nil? %>
+<div class="row span11">  <%= will_paginate %> </div>
+
+<div class="row span11">
+
+<%
+@i=0
+%>
+<% @staffs.each do |staff| %>
+
+  <tr>
+   <td class="span1"><span class="badge badge-success"><%= @i+=1%></span></td>
+   <td><%= staff.EmployeeID%>  </td>
+   <td><%= staff.EmployeeName %>   </td>
+   <td><%= staff.department.DepartmentName %>  </td>
+   <td><%= (staff.Gender ==0) ? 'Male' : 'Female' %>  </td>
+   <td><%= staff.Address %>  </td>
+   <td><%= staff.Phone%>  </td>
+
+    <td><%= link_to t('system.link_edit'), edit_staff_path(staff) ,class: 'active'  %></td>
+  </tr>
+<% end %>
+
+<%else %>
+
+<div class="span11"> <%= t('no_record_found')%> </div>
+
+<% end %>
+
+</div>

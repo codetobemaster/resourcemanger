@@ -1,0 +1,107 @@
+
+<div class="row">
+<div class="span13">
+<!-- search form-->
+ <%= render 'search_form'%>
+<!-- end search form-->
+</div>
+</div>
+
+
+<div class="row">
+<div class="span13">
+<% if !@staffs.nil? %>
+<div class="row">  <%= will_paginate %> </div>
+<div class="row ">
+                        <div class="row">
+                        <h4>
+                              <div class="span1"> <%= t('system.no')%> </div>
+                                <div class="span1"> <%= t('staff.id')%> </div>
+                                <div class="span2"> <%= t('staff.name')%> </div>
+                                <div class="span2"> <%= t('staff.department')%></div>
+                                <div class="span1">  <%= t('staff.gender')%>  </div>
+                                <div  class="span2">  <%= t('staff.address')%> </div>
+                                <div  class="span2">   <%= t('staff.phone')%></div>
+                                <div  class="span2">   <%= t('staff.dateofbirth')%></div>
+                        </div>
+                        <br/>
+                        <legend></legend>
+                        </h4>
+<%
+@i=0
+%>
+<div class="accordion" id="accordion2">
+
+
+<% @staffs.each do |staff| %>
+<%
+@i+=1
+%>
+
+<div class="accordion-group">
+        <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#<%= staff.EmployeeID%>">
+
+                        <div class="row">
+                                 <div class="span1"> <%= @i%> &nbsp; </div>
+                                <div class="span1"> <%= staff.EmployeeID%> &nbsp; </div>
+                                <div class="span2">  <%= staff.EmployeeName %> &nbsp; </div>
+                                <div class="span2">  <%= staff.department.DepartmentName %> &nbsp; </div>
+                                <div class="span1"> <%= (staff.Gender ==0) ? t('staff.genders.male') : t('staff.genders.female') %> &nbsp;  </div>
+                                <div  class="span2"> <%= staff.Address %> &nbsp;  </div>
+                                <div  class="span2"> <%= staff.Phone%> &nbsp;</div>
+                                <div  class="span1"> <p class="navbar-text"> <%= staff.DateOfBirth%> &nbsp; </p></div>
+                        </div>
+                </a>
+        </div>
+<% if (!params[:select].nil? && !params[:select].blank?)
+
+ if(staff.EmployeeID==(params[:select].to_i))
+%>
+ <div id="<%= staff.EmployeeID%>"  class="accordion-body collapse in" >
+
+        <%
+        else
+        %>
+        <div id="<%= staff.EmployeeID%>" class="accordion-body collapse">
+<%
+        end
+else
+%>
+ <div id="<%= staff.EmployeeID%>" class="accordion-body collapse" >
+<%
+end%>
+
+                <div class="accordion-inner">
+<legend>Staff infomations</legend>
+<div class="row">
+                    <%= form_for(staff) do |f| %>
+                    <div class="span12 offset1 form-inline">
+                    <%= render 'shared/error_messages', object: f.object %>
+                    <%= render 'fields',st: staff , f: f%>
+                    </div>
+                    </div>
+                    <br/>
+           <legend></legend>
+                <div class="row">
+                <div class="span2"><%= f.submit t('system.btn_save'), class: "btn  btn-primary" %></div>
+                <% end %>
+                </div>
+                </div>
+        </div>
+</div>
+
+<% end %>
+</div>
+<%else %>
+
+<div class="span11"> <%= t('no_record_found')%> </div>
+
+<% end %>
+</div>
+</div>
+</div>
+
+
+
+<!-- Start Collapsible ITems-->
