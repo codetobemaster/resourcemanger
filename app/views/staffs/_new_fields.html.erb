@@ -1,0 +1,96 @@
+
+
+    	<div class="span2">
+    	<%= f.label :'Staff Name' %></div>
+    	<div class="span3"><%= f.text_field :EmployeeName %></div>
+
+        <div class="span2"><%= f.label :Gender %></div>
+        <div class="span3">
+        <%= f.collection_select :Gender, Property.where(property_type: "gender"), :property_value, :property_key, {selected: st.Gender} , prompt: true%>
+
+        </div>
+
+        <div class="span2"><%= f.label :Department %></div>
+        <div class="span3">
+        <%= f.collection_select :DepartmentID, Department.all, :DepartmentID, :DepartmentName, {selected: st.DepartmentID
+        } , prompt: true%>
+
+        </div>
+
+        <div class="span2"><%= f.label :DateOfBirth %></div>
+
+          <div class="span3">
+
+          <%= f.text_field :DateOfBirth, id: "new_staff_DateOfBirth", value: "#{(st.DateOfBirth.nil? || st.DateOfBirth.blank?)? '' : (st.DateOfBirth.strftime('%Y-%m-%d')) }"%>
+          </div>
+
+<div class="span2"><%= f.label :'Current Position' %></div>
+           <div class="span3">
+                  <%= f.collection_select :PositionID, Position.all, :PositionID,:PositionName, {selected: st.PositionID} , prompt: true%>
+
+        </div>
+
+
+        <div class="span2"><%= f.label :IdentityCard %></div>
+         <div class="span3"><%= f.text_field   :IdentityCard %></div>
+
+        <div class="span2"><%= f.label :TimeCard %></div>
+          <div class="span3"><%= f.text_field :CardID %></div>
+
+        <div class="span2"><%= f.label :Phone %></div>
+          <div class="span3"><%= f.text_field :Phone %></div>
+
+        <div class="span2"><%= f.label :Email %></div>
+          <div class="span3"><%= f.text_field :Email %></div>
+
+           <div class="span2"><%= f.label :Address %></div>
+          <div class="span3"><%= f.text_field :Address %></div>
+
+           <div class="span2"><%= f.label :Commune %></div>
+          <div class="span3"><%= f.text_field :Commune %></div>
+
+           <div class="span2"><%= f.label :District %></div>
+          <div class="span3"><%= f.text_field :District %></div>
+
+           <div class="span2"><%= f.label :Province %></div>
+          <div class="span3"><%= f.text_field :Province %></div>
+
+           <div class="span2"><%= f.label :BirthPlace %></div>
+          <div class="span3"><%= f.text_field :BirthPlace %></div>
+
+           <div class="span2"><%= f.label :Resident %></div>
+          <div class="span3"><%= f.text_field :Resident %></div>
+
+        <div class="span2"><%= f.label :Married %></div>
+        <div class="span3">
+        <%= f.collection_select :MarriageStatus, Property.where(property_type: "married"), :property_value, :property_key, {selected: st.MarriageStatus} , prompt: true%>
+
+        </div>
+
+
+           <div class="span2"><%= f.label :Religious %></div>
+          <div class="span3"><%= f.text_field :Religious %></div>
+
+           <div class="span2"><%= f.label :Nationality %></div>
+          <div class="span3"><%= f.text_field :Nationality %></div>
+
+           <div class="span2"><%= f.label :'Start Trial' %></div>
+                    <div class="span3"><%= f.text_field :StartTrial  , id: "new_staff_StartTrial" , value: "#{(st.StartTrial.nil? || st.StartTrial.blank?)? '' : (st.StartTrial.strftime('%Y-%m-%d')) }"  %></div>
+
+
+           <div class="span2"><%= f.label :StartDate %></div>
+          <div class="span3"><%= f.text_field :StartDate, id: "new_staff_StartDate", value: "#{(st.StartDate.nil? || st.StartDate.blank?)? '' : (st.StartDate.strftime('%Y-%m-%d')) }" %></div>
+
+           <div class="span2"><%= f.label :ContractID %></div>
+          <div class="span3"><%= f.text_field :ContractID %></div>
+
+             <div class="span2"><%= f.label :'Start Date Insurance' %></div>
+          <div class="span3"><%= f.text_field :StartDateInsurance , id: "new_staff_StartDateInsurance" , value: "#{(st.StartDateInsurance.nil? || st.StartDateInsurance.blank?)? '' : (st.StartDateInsurance.strftime('%Y-%m-%d')) }" %></div>
+
+             <div class="span2"><%= f.label :HospitalID %></div>
+          <div class="span3"><%= f.text_field :HospitalID %></div>
+
+             <div class="span2"><%= f.label :'Family Condition' %></div>
+          <div class="span3"><%= f.text_field :FamilyConditionNumber %></div>
+             <div class="span2"><%= f.label :TaxID %></div>
+          <div class="span3"><%= f.text_field :TaxID%></div>

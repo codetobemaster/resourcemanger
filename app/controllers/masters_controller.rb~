@@ -1,0 +1,25 @@
+class MastersController < ApplicationController
+
+def index
+   # @new_department=params[:new_department]
+$pageselect=''
+
+
+    @search = Department.search(params[:search])
+    @position = Position.search(params[:position])
+    @positions=@position.all
+    @departments = @search.all   # or @search.relation to lazy load in view
+
+        @position = Position.search(params[:position])
+        @positions = @position.all   # or @search.relation to lazy load in view
+# respond_to do |format|
+#         format.html { render action: "index"}
+#         format.js {render js: @new_department.errors, status: :unprocessable_entity}
+#         format.js {render js: @departments }
+
+#    end
+end
+
+
+
+end

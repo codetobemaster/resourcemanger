@@ -1,0 +1,67 @@
+            <div class="row">
+
+<div class="span12 ">
+<legend>Search department</legend>
+            <div class="row form-inline span12">
+                <%= form_for @search, :url => departments_path, :html => {:method => :get} do |f| %>
+                  <%= f.label :'DepartmentName' %>
+                  <%= f.text_field :DepartmentName_contains %>
+
+                <!-- etc... -->
+                  <%= f.submit t('system.btn_search') , class: "btn  btn-primary" %>
+                <% end %>
+
+            </div>
+</div>
+</div>
+
+            <div class="row">
+
+                    <div class="span12">
+  <legend>Departments</legend>
+                        <div class="row">
+                                   <%
+                                   if(@new_department.nil?)
+                                    @new_department= Department.new
+                                    end
+                                    %>
+                                    <%= form_for(@new_department) do |f| %>
+                                    <div class="row">
+                                    <div class="span6 form-inline">
+                                    <%= render 'shared/error_messages', object: f.object %>
+                                    <%= render 'department',st: @new_department , f: f%>
+                        <div class="row span6">
+<div class="span1"><%= f.submit (@new_department.DepartmentID.nil?)?  t('system.btn_save') : t('system.btn_update'), class: "btn  btn-primary" %></div>
+
+                                       </div>
+                                    </div>
+                                <div class="span6">
+                                  <div class="row  ">  <%= will_paginate %> </div>
+                                    <table class="table table-hover">
+                                        <tr>
+                                        <th>Name </th> <th> Parent Note </th> <th> Description </th> <th> Edit </th>
+
+                                         </tr>
+                                         <% @departments.each do |department|%>
+                                                <tr>
+                                        <td><%= department.DepartmentName %> </td>
+                                        <td> <%= (department.ParentNode==0)?  department.DepartmentName : Department.find(department.ParentNode).DepartmentName%> </td>
+                                        <td> <%= department.Description%> </td>
+                                        <td><%= link_to 'Edit', edit_department_path(department)  , class: 'background' %></td>
+                                                </tr>
+                                        <% end %>
+
+                                        </table>
+
+                                </div>
+
+                                    </div>
+                                    <br/>
+
+                                        <% end %>
+
+
+                                        </div>
+                        </div>
+
+            </div>

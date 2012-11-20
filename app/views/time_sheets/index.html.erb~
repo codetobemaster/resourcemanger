@@ -1,0 +1,38 @@
+<% provide(:title, 'Time Sheets') %>
+<div clas="row">
+<div class="span13">
+<div class="row">
+<%= render 'search_form' %>
+</div>
+                <div class="row ">
+                <div class="span13">
+
+                         <legend>TimeSheets</legend>
+                                   <%
+                                   if(@new_time_sheet.nil?)
+                                    @new_time_sheet= TimeSheet.new
+                                    @new_time_sheet.staff=current_user.staff
+                                    end
+                                    %>
+
+                                    <div class="row">
+                                      <%= form_for(@new_time_sheet) do |f| %>
+                                    <div class="span13 offset1 form-inline">
+                                    <%= render 'shared/error_messages', object: f.object %>
+                                    <%= render 'timesheets_staff_field',st: @new_time_sheet , f: f%>
+                                    </div>
+                                    <div class="row span13 offset1">
+<div class="span1"><%= f.submit (@new_time_sheet.id.nil?)?  t('system.btn_save') : t('system.btn_update'), class: "btn  btn-primary" %></div>
+
+                                       </div>
+                                    <%end%>
+                                    </div>
+                </div>
+                </div>
+
+        <div class="row">
+        <div class="span13">
+                <%= render 'timesheets_table' %>
+                </div>
+        </div></div>
+        </div>

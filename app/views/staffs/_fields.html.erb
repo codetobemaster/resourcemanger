@@ -1,16 +1,4 @@
 
-   <script>
-    $(function() {
-        $( "#staff_DateOfBirth" ).datepicker({ format: 'yyyy-mm-dd'})
-        $( "#staff_StartTrial" ).datepicker({ format: 'yyyy-mm-dd'})
-        $( "#staff_StartDate" ).datepicker({ format: 'yyyy-mm-dd'})
-        $( "#staff_StartDateInsurance" ).datepicker({ format: 'yyyy-mm-dd'})
-    });
-    </script>
-    	<div class="span2">
-    	<%= f.label :StaffID %></div>
-    	<div class="span3"><%= f.label :"#{st.EmployeeID}"  %></div>
-
     	<div class="span2">
     	<%= f.label :'Staff Name' %></div>
     	<div class="span3"><%= f.text_field :EmployeeName %></div>

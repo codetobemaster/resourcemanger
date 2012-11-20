@@ -36,10 +36,16 @@ en:
          normal_time_out: "17:30"
          overtime_start_affter: "18:30"
          no: "NO"
+         btn_update: "Update"
+         btn_cancel: "Cancel"
+ will_paginate:
+         next_label: "Next"
+         previous_label: "Previous"
  user:
          profile: "Profile"
          setting: "Settings"
-         list_schedules: "List Schedules"
+         list_schedules: "Schedules Manager"
+         list_time_sheets: "TimeSheets Manager"
          main_menu: "Users"
  users:
     edit:
@@ -108,6 +114,13 @@ en:
         genders:
                 male: "Male"
                 female: "Female"
+        dateofbirth: "DateOfBirth"
+        startworking: "Start Date"
+        have_contracted: "No have contract"
+ master:
+        masters_data: "Masters data"
+        departments: "Departments"
+        positions: "Positions"
  project_manager:
        main_menu: "Projects"
        project_add: "Add project"

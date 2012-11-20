@@ -34,7 +34,7 @@
                 <%= t ('account_manager.account_manager_title') %> <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to  t('account_manager.employee_manager'), '#' %></li>
+                <li><%= link_to  t('account_manager.employee_manager'), staffs_path %></li>
                  <li class="divider"></li>
                 <li><%= link_to t('account_manager.seach_employee'), '#' %></li>
                  <li class="divider"></li>
@@ -50,11 +50,11 @@
               </a>
               <ul class="dropdown-menu">
       <!--Dayly time card manager-->
-                      <li><%= link_to  t('attendant_manager.dayly_manager'), time_in_time_outs_path(working_day: (Date.today- 3.day).to_s) %></li>
+                      <li><%= link_to  t('attendant_manager.dayly_manager'), time_in_time_outs_path(working_day: (Date.today).strftime("%Y-%m-%d")) %></li>
 
         <li class="divider"></li>
       <!--Monthly and yearly_report-->
-                      <li><%= link_to t('monthly_yearly_report'), monthly_report_path(year: Date.today.year , month: Date.today.month) %></li>
+                      <li><%= link_to t('attendant_manager.monthly_yearly_report'), monthly_report_time_in_time_outs_path(year: Date.today.year , month: Date.today.month) %></li>
 
 
         <li class="divider"></li>
@@ -89,6 +89,10 @@
         <!--Schedule manager-->
                 <li><%= link_to t('user.list_schedules'), schedules_path %></li>
                 <li class="divider"></li>
+                        <!--TimeSheet manager-->
+                <li><%= link_to t('user.list_time_sheets'), time_sheets_path %></li>
+                <li class="divider"></li>
+
         <!--profile manager-->
                 <li><%= link_to t('user.profile'), current_user %></li>
                  <li class="divider"></li>
@@ -101,6 +105,26 @@
                 </li>
               </ul>
             </li>
+
+
+
+<!--master menu-->
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+               <%= t('master.masters_data')%> <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+        <!--Departments-->
+                <li><%= link_to t('master.departments'), departments_path %></li>
+                <li class="divider"></li>
+        <!--Positions-->
+                <li><%= link_to t('master.positions'), positions_path %></li>
+              <li class="divider"></li>
+        <!--Day works-->
+                <li><%= link_to t('master.day_work'), dayworks_path %></li>
+              </ul>
+            </li>
+
 
           <% else %> <!-- if not login-->
             <li><%= link_to "Sign in", signin_path %></li>

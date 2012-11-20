@@ -1,0 +1,69 @@
+<div class="row">
+
+<div class="span12 ">
+<legend>Search Position</legend>
+            <div class="row form-inline span12">
+                <%= form_for @search, :url => positions_path, :html => {:method => :get} do |f| %>
+                  <%= f.label :'Position Name' %>
+                  <%= f.text_field :PositionName_contains %>
+
+                <!-- etc... -->
+                  <%= f.submit t('system.btn_search') , class: "btn  btn-primary" %>
+                <% end %>
+
+            </div>
+</div>
+</div>
+
+            <div class="row">
+
+                    <div class="span12">
+  <legend>Positions</legend>
+
+                        <div class="row">
+                                   <%
+                                   if(@new_position.nil?)
+                                    @new_position= Position.new
+                                    end
+                                    %>
+                                    <%= form_for(@new_position) do |f| %>
+                                    <div class="row">
+                                    <div class="span6 form-inline">
+                                    <%= render 'shared/error_messages', object: f.object %>
+                                    <%= render 'position',st: @new_position , f: f%>
+                        <div class="row span6">
+
+<div class="span1"><%= f.submit (@new_position.PositionID.nil?)?  t('system.btn_save') : t('system.btn_update'), class: "btn  btn-primary" %></div>
+
+                                       </div>
+                                    </div>
+                                <div class="span6">
+                                  <div class="row  ">  <%= will_paginate %> </div>
+                                    <table class="table table-hover">
+                                        <tr>
+                                        <th>PositionName </th> <th> ShortName </th> <th> Description </th> <th> Edit </th>
+
+                                         </tr>
+                                         <% @positions.each do |position|%>
+                                                <tr>
+                                        <td><%= position.PositionName %> </td>
+                                        <td> <%= position.PositionShortName%> </td>
+                                        <td> <%= position.Description%> </td>
+                                        <td><%= link_to 'Edit', edit_position_path(position)  , class: 'background' %></td>
+                                                </tr>
+                                        <% end %>
+
+                                        </table>
+
+                                </div>
+
+                                    </div>
+                                    <br/>
+
+                                        <% end %>
+
+
+                                        </div>
+                        </div>
+
+            </div>

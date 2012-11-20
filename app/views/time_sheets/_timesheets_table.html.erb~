@@ -1,0 +1,101 @@
+<div class="row">
+ <legend>List all Timesheet</legend>
+
+<%
+@staff_list=[]
+@staff_month=[]
+
+ @time_sheets.each do |time_sheet|
+        if(!@staff_list.include? time_sheet.staff)
+         @staff_list.push(time_sheet.staff)
+        end
+        if(!@staff_month.include? [time_sheet.staff,time_sheet.year,time_sheet.month])
+         @staff_month.push([time_sheet.staff,time_sheet.year,time_sheet.month])
+        end
+end
+
+
+if (@staff_list)
+
+%>
+
+
+<div class="row">
+                <div class="form-inline ">
+                <b>
+               <div class="span2">Staff Name - ID </div>
+               <div class="row">
+                <div class="span13_1">
+                <div class="span1">    Year      </div>
+                <div class="span1">     Month     </div>
+                        <%(1..31).each do |title| %>
+                         <div class="span1_1"><%=  title %>&nbsp; </div>
+                        <%end%>
+
+                  </div>
+                  </div>
+                  </b>
+                </div>
+</div>
+<div class="row">
+ <legend></legend>
+
+          <% @staff_list.each do |staff| %>
+            <% @staff_month.each do |month| %>
+                <% if(month[0].eql?staff) %>
+
+                <div class="form-inline">
+
+                        <div class="span2"><%= (staff.nil?)? '' :( "#{staff.EmployeeName} - #{staff.id}" ) %></div>
+                        <div class="row span13_1">
+                                        <div class="row">
+                <div class="divider"></div>
+                </div>
+                                <div class="span1">    <%= month[1] %>      </div>
+                                <div class="span1">     <%= month[2]%>     </div>
+
+                        <% @day_of_months= []
+                         @day_edit= []
+                        %>
+                                 <!-- loop for day_work here-->
+                        <%@time_sheets.each do |time_sheet_user| %>
+                                <% if((time_sheet_user.staff.eql?staff) && (time_sheet_user.year.eql? month[1]) && (time_sheet_user.month.eql? month[2])  )%>
+                                        <% @day_of_months.push(time_sheet_user.day)
+                                            @day_edit.push ( [time_sheet_user.day,time_sheet_user])
+                                         %>
+                                <%end%>
+                         <%end %>
+                                <%(1..31).each do |day| %>
+                                 <div class="span1_1">
+                                 <% if (@day_of_months.include? day) %>
+                                   <%@day_edit.each do |edit| %>
+                                   <% if (edit[0].eql? day) %>
+                                    <span class="label"><%= link_to "#{day}", edit_time_sheet_path(edit[1]) ,class: 'background'  %> </span>
+
+                                     <%end%>
+                                  <%end%>
+                                  <%else%>
+                                  &nbsp;
+                                  <%end%>
+
+                                  </div>
+                                <%end%>
+                        </div>
+                         </div>
+                <%end%>
+
+
+            <%end%>
+
+          <%end%>
+
+
+
+
+
+
+ </div>
+<%end%>
+
+
+</div>

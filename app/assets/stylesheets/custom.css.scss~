@@ -20,6 +20,12 @@ section {
   overflow: auto;
 }
 
+a{
+
+    &:hover {
+      background-color: #FFFFFF;
+    }
+}
 textarea {
   resize: vertical;
 }
@@ -62,16 +68,27 @@ p {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 1124px;
+  width: 1254px;
 }
 .span13
 {
-  width: 1124px;
+  width: 1254px;
 }
 .span13_in
 {
   width: 1022px;
 }
+.span13_1
+{
+   width: 1190px;
+}
+
+.span13_2
+{
+   width: 1235px;
+}
+
+
 .span12 {
   width: 940px;
 }
@@ -109,6 +126,9 @@ p {
 .span3 {
   width: 220px;
 }
+.span3_1 {
+  width: 160px;
+}
 .span2 {
   width: 140px;
 }
@@ -118,6 +138,15 @@ p {
 .span1 {
   width: 60px;
 }
+
+.span1_1 {
+  width: 10px;
+}
+
+.span1_2 {
+  width: 20px;
+}
+
 
 
 /* header */

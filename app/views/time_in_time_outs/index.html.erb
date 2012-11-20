@@ -3,11 +3,12 @@
         $("#working_day").datepicker({ format: 'yyyy-mm-dd'})
     });
     </script>
-
-<h1><%= t('time_in_time_out.index_title')%></h1>
 <div class="row">
+<div class="span13">
+<h1><%= t('time_in_time_out.index_title')%></h1>
+<div class="row span13">
     <%= form_tag time_in_time_outs_path, method: 'get' do %>
-    	<div class="span12">
+    	<div class="row">
     	<div class="row">
 
     	<div class="input-append span4_1">
@@ -44,12 +45,12 @@
 
 </div>
 
-<div class="row">
+<div class="row span13">
 
 <% if !@time_in_time_outs.nil? %>
-<div class="row span12 ">  <%= will_paginate %> </div>
+<div class="row  ">  <%= will_paginate %> </div>
 
-<div class="row span12">
+<div class="row ">
 <table class="table table-hover" >
 
   <tr>
@@ -165,5 +166,7 @@ t('no_record_found')
  %>
 
 <% end %>
+</div>
+</div>
 </div>
 </div>

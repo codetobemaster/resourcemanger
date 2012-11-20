@@ -1,34 +1,53 @@
+
+
 <div class="row">
-                        <legend>Staffs Search</legend>
+        <legend>Staffs Search</legend>
+    <div class="span13">
+
+
     <%= form_tag staffs_path, method: 'get' do %>
     	<div class="row">
-    	<div class="span4 input-append">
-    	 <span class="add-on"><%= t('staff.name') %></span>
-    	 <select name="EmployeeID" class="span3">
-    	 <option value=" ">Please select</option>
-                <% Staff.all.each do |staff| %>
-                 <option value="<%= staff.EmployeeID %>"><%= staff.EmployeeID %> - <%= staff.EmployeeName %></option>
-        <% end %>
-        </select>
-    	 </div>
-    	 <div class="span5 input-append">
-    	 <span class="add-on"><%= t('staff.department') %></span>
-    	 <select name="DepartmentID" class="span3">
+            <h4>
+            <div class="form-inline">
+            <div class="span3">
+    	   <%=  t('staff.name')  %>
+             <%= text_field_tag :EmployeeName, nil, class: 'span2' %>
+             </div>
+<div class="span4">
+    	 <%=  t('staff.department')  %>
+        <select name="department_id"   class="span2">
     	 <option value=" ">Please select</option>
                 <% Department.all.each do |de| %>
-                 <option value="<%= de.DepartmentID %>"><%= de.DepartmentID %> - <%= de.DepartmentName %></option>
+                 <option value="<%= de.DepartmentID %>"> <%= de.DepartmentName %></option>
         <% end %>
         </select>
-    	 </div>
+</div>
+<div class="span4">
+         <%= t('staff.startworking')  %>
+          <%= text_field_tag :StartDate, nil, class: 'span2' %>
+ </div>
+<div class="span2">
+<%= check_box_tag :HaveContracted %>
+          <%= t('staff.have_contracted') %>
+</div>
+<div class="span3_1">
+<div class="row">
+         <%= submit_tag  "Search", EmployeeID: nil, class: "btn  btn-primary" %>
 
+                <a class="btn accordion-toggle" data-toggle="collapse" data-parent="#newstaff" href="#new">
+                New Staff
+                </a>
+        </div>
+          </div>
+</div>
 
-        <div class="span1">  <%= submit_tag  "Search", EmployeeID: nil, class: "btn  btn-primary" %></div>
-
+      </h4>
           </div>
 
 
     <% end %>
     <br/>
-     <legend></legend>
 
+
+</div>
 </div>

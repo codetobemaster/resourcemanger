@@ -10,6 +10,7 @@ gem 'ruby-odbc', '0.99994'
 gem 'activerecord-sqlserver-adapter'
 gem 'tiny_tds'
 gem 'bootstrap-datepicker-rails'
+gem 'validates_timeliness', '~> 3.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

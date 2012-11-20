@@ -15,6 +15,7 @@ depa=params[:department_id]
 
 end
 
+public
 def monthly_report
     department_id= (params[:department_id].nil? || params[:department_id] .blank?) ? 0: params[:department_id].to_i
 
@@ -22,7 +23,7 @@ def monthly_report
     month= (params[:month].nil? || params[:month].blank?) ? '' : params[:month].to_i
 
     @time_in_time_outs = TimeInTimeOut.report_month(department_id,year,month)
-   @time_in_time_outs_distinct= @time_in_time_outs.select("distinct(tblTimeInTimeOut.EmployeeID)").paginate(:per_page => 30, :page => params[:page])
+   @time_in_time_outs_distinct= @time_in_time_outs.select("distinct(tblTimeInTimeOut.EmployeeID)")
 #    if(department_id!=0)
 
 #         @staffs=Staff.where(DepartmentID: department_id.to_i)

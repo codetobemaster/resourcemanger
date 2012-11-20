@@ -1,0 +1,66 @@
+<div class="row">
+
+<div class="span12 ">
+<legend>Search DayWork</legend>
+            <div class="row form-inline span12">
+                <%= form_for @search, :url => day_works_path, :html => {:method => :get} do |f| %>
+                  <%= f.label :'DayWorkName' %>
+                  <%= f.text_field :name_contains %>
+
+                <!-- etc... -->
+                  <%= f.submit t('system.btn_search') , class: "btn  btn-primary" %>
+                <% end %>
+
+            </div>
+</div>
+</div>
+
+            <div class="row">
+
+                    <div class="span12">
+  <legend>Day Works</legend>
+                        <div class="row">
+                                   <%
+                                   if(@new_day_work.nil?)
+                                    @new_day_work= DayWork.new
+                                    end
+                                    %>
+                                    <%= form_for(@new_day_work) do |f| %>
+                                    <div class="row">
+                                    <div class="span6 form-inline">
+                                    <%= render 'shared/error_messages', object: f.object %>
+                                    <%= render 'daywork',st: @new_day_work , f: f%>
+                        <div class="row span6">
+<div class="span1"><%= f.submit (@new_day_work.id.nil?)?  t('system.btn_save') : t('system.btn_update'), class: "btn  btn-primary" %></div>
+
+                                       </div>
+                                    </div>
+                                <div class="span6">
+                                  <div class="row  ">  <%= will_paginate %> </div>
+                                    <table class="table table-hover">
+                                <tr>
+                                <th>Name </th> <th> Hourwork </th> <th> Note </th> <th> Edit </th> <th> Delete </th>
+                                </tr>
+                                 <% @day_works.each do |day_work|%>
+                                        <tr>
+                                <td><%= day_work.name %> </td>
+                                <td> <%= day_work.hourwork%> </td>
+                                <td> <%= day_work.note%></td>
+                                <td><%= link_to 'Edit', edit_day_work_path(day_work),class: 'background' %></td>
+                          <td><%= link_to 'Delete', day_work, method: :delete, data: { confirm: 'Are you sure?' } ,  class: 'background'  %>
+                                        </tr>
+                                        <% end %>
+                                        </table>
+
+                                </div>
+
+                                    </div>
+                                    <br/>
+
+                                        <% end %>
+
+
+                                        </div>
+                        </div>
+
+            </div>

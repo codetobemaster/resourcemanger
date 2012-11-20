@@ -1,0 +1,5 @@
+class AddStaffIdToUser < ActiveRecord::Migration
+  def change
+  add_column :staff_id , :integer
+  end
+end

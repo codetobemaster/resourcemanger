@@ -1,18 +1,29 @@
 Resourcemanager::Application.routes.draw do
+  resources :time_sheets
+
+  resources :day_works
+
   resources :schedules
   resources :user_attend_projects
   resources :projects
   resources :users
   resources :staffs
-  resources :time_in_time_outs
+  resources :positions
+  resources :time_in_time_outs do
+  collection do
+    get  :monthly_report
+  end
+
+  end
   resources :sessions, only: [:new, :create, :destroy]
+  resources :departments
 
   root to: 'sessions#new'
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
-  match '/monthly_report', to: 'time_in_time_outs#monthly_report'
-
+ # match '/monthly_report', to: 'time_in_time_outs#monthly_report'
+  match '/masters'      , to: 'masters#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

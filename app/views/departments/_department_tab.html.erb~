@@ -1,0 +1,67 @@
+<div class="row">
+
+<div class="span12 ">
+<legend>Search DayWork</legend>
+            <div class="row form-inline span12">
+                <%= form_for @search, :url => day_wokrs_path, :html => {:method => :get} do |f| %>
+                  <%= f.label :'DayWorkName' %>
+                  <%= f.text_field :name_contains %>
+
+                <!-- etc... -->
+                  <%= f.submit t('system.btn_search') , class: "btn  btn-primary" %>
+                <% end %>
+
+            </div>
+</div>
+</div>
+
+            <div class="row">
+
+                    <div class="span12">
+  <legend>Day Works</legend>
+                        <div class="row">
+                                   <%
+                                   if(@new_day_work.nil?)
+                                    @new_day_work= DayWork.new
+                                    end
+                                    %>
+                                    <%= form_for(@new_day_work) do |f| %>
+                                    <div class="row">
+                                    <div class="span6 form-inline">
+                                    <%= render 'shared/error_messages', object: f.object %>
+                                    <%= render 'daywork',st: @new_day_work , f: f%>
+                        <div class="row span6">
+<div class="span1"><%= f.submit (@new_day_work.id.nil?)?  t('system.btn_save') : t('system.btn_update'), class: "btn  btn-primary" %></div>
+
+                                       </div>
+                                    </div>
+                                <div class="span6">
+                                  <div class="row  ">  <%= will_paginate %> </div>
+                                    <table class="table table-hover">
+                                        <tr>
+                                        <th>Name </th> <th> Hourwork </th> <th> Note </th> <th> Edit </th> <th> Delete </th>
+
+                                         </tr>
+                                         <% @departments.each do |department|%>
+                                                <tr>
+                                        <td><%= department.DepartmentName %> </td>
+                                        <td> <%= (department.ParentNode==0)?  department.DepartmentName : Department.find(department.ParentNode).DepartmentName%> </td>
+                                        <td> <%= department.Description%> </td>
+                                        <td><%= link_to 'Edit', edit_department_path(department)  , class: 'background' %></td>
+                                                </tr>
+                                        <% end %>
+
+                                        </table>
+
+                                </div>
+
+                                    </div>
+                                    <br/>
+
+                                        <% end %>
+
+
+                                        </div>
+                        </div>
+
+            </div>

@@ -1,0 +1,37 @@
+
+<div class="span13 ">
+<legend>Search department</legend>
+            <div class="row form-inline span13">
+                <%= form_for @search, :url => time_sheets_path, :html => {:method => :get} do |f| %>
+                 <% if (current_user.admin?) %>
+                  <div class="span1"> <%= f.label :'Staff Name' %></div>
+                  <div class="span2">
+                  <%= f.text_field :staff_EmployeeName_contains ,class: 'span2' %></div>
+                  <%else%>
+                  <%= f.hidden_field :staff_EmployeeName_contains, value: current_user.staff.EmployeeName  %>
+                  <%= f.h  :staff_EmployeeName_contains ,class: 'span2' %></div>
+
+                   <%end%>
+                  <div class="span1">
+                   <%= f.label :'Year' %></div>
+                   <div class="span1">
+                  <%= f.text_field :year_equals ,class: 'span1' %></div>
+                  <div class="span1">
+                   <%= f.label :'Month' %></div>
+                   <div class="span1">
+                  <%= f.text_field :month_equals , class: 'span1'%> </div>
+                  <div class="span1">
+                  <%= f.label :'Day From' %> </div>
+                  <div class="span1">
+                  <%= f.text_field :day_greater_than_or_equal_to , class: 'span1'%> </div>
+                  <div class="span1">
+                   <%= f.label :'Day To' %> </div>
+                   <div class="span2">
+                  <%= f.text_field :day_less_than_or_equal_to , class:'span1' %> </div>
+                <!-- etc... -->
+                  <%= f.submit t('system.btn_search') , class: "btn  btn-primary" %>
+                <% end %>
+
+            </div>
+</div>
+</div>

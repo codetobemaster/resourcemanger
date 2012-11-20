@@ -1,15 +1,4 @@
 
-   <script>
-    $(function() {
-        $( "#staff_DateOfBirth" ).datepicker({ format: 'yyyy-mm-dd'})
-        $( "#staff_StartTrial" ).datepicker({ format: 'yyyy-mm-dd'})
-        $( "#staff_StartDate" ).datepicker({ format: 'yyyy-mm-dd'})
-        $( "#staff_StartDateInsurance" ).datepicker({ format: 'yyyy-mm-dd'})
-    });
-    </script>
-    	<div class="span2">
-    	<%= f.label :StaffID %></div>
-    	<div class="span3"><%= f.label :"#{st.EmployeeID}"  %></div>
 
     	<div class="span2">
     	<%= f.label :'Staff Name' %></div>
@@ -17,13 +6,13 @@
 
         <div class="span2"><%= f.label :Gender %></div>
         <div class="span3">
-        <%= f.collection_select :Gender, Property.where(property_type: "gender"), :property_value, :property_key, {selected: st.Gender} , prompt: true%>
+        <%= f.collection_select :Gender, Property.where(property_type: "gender"), :property_value, :property_key, {selected: staff.Gender} , prompt: true%>
 
         </div>
 
         <div class="span2"><%= f.label :Department %></div>
         <div class="span3">
-        <%= f.collection_select :DepartmentID, Department.all, :DepartmentID, :DepartmentName, {selected: st.DepartmentID
+        <%= f.collection_select :DepartmentID, Department.all, :DepartmentID, :DepartmentName, {selected: staff.DepartmentID
         } , prompt: true%>
 
         </div>
@@ -32,12 +21,12 @@
 
           <div class="span3">
 
-          <%= f.text_field :DateOfBirth, value: "#{(st.DateOfBirth.nil? || st.DateOfBirth.blank?)? '' : (st.DateOfBirth.strftime('%Y-%m-%d')) }"%>
+          <%= f.text_field :DateOfBirth, value: "#{(staff.DateOfBirth.nil? || staff.DateOfBirth.blank?)? '' : (staff.DateOfBirth.strftime('%Y-%m-%d')) }"%>
           </div>
 
 <div class="span2"><%= f.label :'Current Position' %></div>
            <div class="span3">
-                  <%= f.collection_select :PositionID, Position.all, :PositionID,:PositionName, {selected: st.PositionID} , prompt: true%>
+                  <%= f.collection_select :PositionID, Position.all, :PositionID,:PositionName, {selected: staff.PositionID} , prompt: true%>
 
         </div>
 
@@ -74,7 +63,7 @@
 
         <div class="span2"><%= f.label :Married %></div>
         <div class="span3">
-        <%= f.collection_select :MarriageStatus, Property.where(property_type: "married"), :property_value, :property_key, {selected: st.MarriageStatus} , prompt: true%>
+        <%= f.collection_select :MarriageStatus, Property.where(property_type: "married"), :property_value, :property_key, {selected: staff.MarriageStatus} , prompt: true%>
 
         </div>
 
@@ -86,16 +75,16 @@
           <div class="span3"><%= f.text_field :Nationality %></div>
 
            <div class="span2"><%= f.label :'Start Trial' %></div>
-          <div class="span3"><%= f.text_field :StartTrial , value: "#{(st.StartTrial.nil? || st.StartTrial.blank?)? '' : (st.StartTrial.strftime('%Y-%m-%d')) }"  %></div>
+          <div class="span3"><%= f.text_field :StartTrial , value: "#{(staff.StartTrial.nil? || staff.StartTrial.blank?)? '' : (staff.StartTrial.strftime('%Y-%m-%d')) }"  %></div>
 
            <div class="span2"><%= f.label :StartDate %></div>
-          <div class="span3"><%= f.text_field :StartDate, value: "#{(st.StartDate.nil? || st.StartDate.blank?)? '' : (st.StartDate.strftime('%Y-%m-%d')) }" %></div>
+          <div class="span3"><%= f.text_field :StartDate, value: "#{(staff.StartDate.nil? || staff.StartDate.blank?)? '' : (staff.StartDate.strftime('%Y-%m-%d')) }" %></div>
 
            <div class="span2"><%= f.label :ContractID %></div>
           <div class="span3"><%= f.text_field :ContractID %></div>
 
              <div class="span2"><%= f.label :'Start Date Insurance' %></div>
-          <div class="span3"><%= f.text_field :StartDateInsurance , value: "#{(st.StartDateInsurance.nil? || st.StartDateInsurance.blank?)? '' : (st.StartDateInsurance.strftime('%Y-%m-%d')) }" %></div>
+          <div class="span3"><%= f.text_field :StartDateInsurance , value: "#{(staff.StartDateInsurance.nil? || staff.StartDateInsurance.blank?)? '' : (staff.StartDateInsurance.strftime('%Y-%m-%d')) }" %></div>
 
              <div class="span2"><%= f.label :HospitalID %></div>
           <div class="span3"><%= f.text_field :HospitalID %></div>

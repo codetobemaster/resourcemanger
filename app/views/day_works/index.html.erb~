@@ -1,0 +1,36 @@
+
+
+
+<% provide(:title, 'Day Work List') %>
+<div class="row">
+<div class="span13 offset1">
+        <%= render 'day_work_tab'%>
+</div>
+</div>
+
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Hourwork</th>
+    <th>Note</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @day_works.each do |day_work| %>
+  <tr>
+    <td><%= day_work.name %></td>
+    <td><%= day_work.hourwork %></td>
+    <td><%= day_work.note %></td>
+    <td><%= link_to 'Show', day_work %></td>
+    <td><%= link_to 'Edit', edit_day_work_path(day_work) %></td>
+    <td><%= link_to 'Destroy', day_work, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Day work', new_day_work_path %>

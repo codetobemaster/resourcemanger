@@ -1,0 +1,13 @@
+
+    	<div class="span2">
+    	<%= f.label :DepartmentName %></div>
+    	<div class="span3"><%= f.text_field :DepartmentName %></div>
+
+        <div class="span2"><%= f.label :ParentNote %></div>
+        <div class="span3">
+        <%= f.collection_select :ParentNode, Department.all, :DepartmentID, :DepartmentName,{selected: st.ParentNode}, prompt: true%>
+
+        </div>
+        <div class="span2">
+    	<%= f.label :Description %></div>
+    	<div class="span3"><%= f.text_area :Description , :size => "20x4" %></div>

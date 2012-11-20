@@ -1,0 +1,24 @@
+        <div class="span2"> <%= f.label :year %></div>
+         <div class="span3">  <%= f.text_field :year %></div>
+
+        <div class="span2"><%= f.label :month %> </div>
+         <div class="span3"><%= f.text_field :month %></div>
+
+        <div class="span2"> <%= f.label :day %></div>
+         <div class="span3"> <%= f.text_field :day %></div>
+
+        <div class="span2"><%= f.label :day_work %></div>
+<div class="span3">
+<%= f.collection_select(:day_work_id, DayWork.all, :id, :name ) %>
+          </div>
+<% if (current_user.admin?)%>
+        <div class="span2"> <%= f.label :Approved %></div>
+         <div class="span3"> <%= f.text_field :status %></div>
+
+<%end%>
+
+        <div class="span2"> <%= f.label :actual %></div>
+         <div class="span3"> <%= f.text_field :actual %></div>
+
+        <div class="span2"> <%= f.label :note %></div>
+         <div class="span3"> <%= f.text_area :note ,:size => "20x4" %></div>

@@ -12,6 +12,8 @@ gem 'tiny_tds'
 gem 'bootstrap-datepicker-rails'
 gem 'validates_timeliness', '~> 3.0'
 
+gem 'meta_search'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
